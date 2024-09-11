@@ -25,7 +25,7 @@ export default function Login() {
         variant: 'destructive'
       });
       return;
-    } else if (!email.includes('@') || !email.includes('.')) {
+    } else if (!email.includes('@')) {
       toast({
         title: 'Algo de errado não está certo',
         description: 'Esse e-mail parece ter vindo de um planeta distante. Tente outro.',
@@ -42,11 +42,11 @@ export default function Login() {
     }
 
     setClickLogin(!clickLogin);
-    // toast({
-    //   title: 'Sucesso',
-    //   description: 'Login realizado com sucesso',
-    //   variant: 'success'
-    // });
+    toast({
+      title: 'Bem-vindo ao clube da Luta!',
+      description: 'Login realizado com sucesso',
+      variant: 'success'
+    });
   };
 
   return (
