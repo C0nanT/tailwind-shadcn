@@ -41,12 +41,12 @@ export default function Login() {
       return;
     }
 
-    setClickLogin(!clickLogin);
     toast({
       title: 'Bem-vindo ao clube da Luta!',
       description: 'Login realizado com sucesso',
       variant: 'success'
     });
+    setClickLogin(!clickLogin);
   };
 
   return (
