@@ -3,23 +3,51 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useEffect, useState } from 'react';
+import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [clickLogin, setClickLogin] = useState(false);
+  const { toast } = useToast(); 
 
   const handleLogin = (e) => {
     e.preventDefault();
+    
     console.log({ email, password });
 
-    setClickLogin(!clickLogin);
-  };
+    if (email === '' || password === '') {
+      toast({
+        title: 'Parece que você esqueceu algo...',
+        description: 'Seu formulário está mais vazio que uma geladeira na segunda-feira.',
+        variant: 'destructive'
+      });
+      return;
+    } else if (!email.includes('@') || !email.includes('.')) {
+      toast({
+        title: 'Algo de errado não está certo',
+        description: 'Esse e-mail parece ter vindo de um planeta distante. Tente outro.',
+        variant: 'destructive'
+      });
+      return;
+    }else if (email.includes('hotmail') || email.includes('outlook')) {
+      toast({
+        title: 'Google > Microsoft',
+        description: 'Aqui não aceitamos Microsoft, favor usar o gmail, obrigado ;)',
+        variant: 'destructive'
+      });
+      return;
+    }
 
-  useEffect(() => {
-    console.log(clickLogin); 
-  }, [clickLogin]);
+    setClickLogin(!clickLogin);
+    // toast({
+    //   title: 'Sucesso',
+    //   description: 'Login realizado com sucesso',
+    //   variant: 'success'
+    // });
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-950">
@@ -28,6 +56,7 @@ export default function Login() {
           Login
         </h2>
         <form noValidate onSubmit={handleLogin} className="space-y-6">
+          <Toaster />
           <div>
             <Label
               className="font-mono text-lg tracking-wider duration-300 text-green-950 hover:tracking-widest transition-alld"
@@ -44,7 +73,6 @@ export default function Login() {
               placeholder="Digite seu email"
               className="flex mt-1 transition-all duration-500 bg-white border-2 border-green-500 focus:ring-2 focus:valid:ring-green-500 valid:text-green-600 invalid:border-gray-500 invalid:text-gray-600 focus:invalid:border-gray-500 focus:invalid:ring-gray-500 hover:pl-4"
             />
-
           </div>
           <div>
             <Label
