@@ -1,4 +1,4 @@
-"use client"; // Isso indica que o componente será renderizado no cliente
+"use client";
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,7 +35,7 @@ export default function Login() {
     }else if (email.includes('hotmail') || email.includes('outlook')) {
       toast({
         title: 'Google > Microsoft',
-        description: 'Aqui não aceitamos Microsoft, favor usar o gmail, obrigado ;)',
+        description: 'Aqui não aceitamos Microsoft, favor usar outro, obrigado ;)',
         variant: 'destructive'
       });
       return;
